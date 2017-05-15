@@ -8,6 +8,7 @@ set(CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR})
 
 add_subdirectory(src)
 include_directories(include)
+include_directories(src)
 
 add_executable(divis ${SOURCE_FILES})
 target_link_libraries(divis divisible)
