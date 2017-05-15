@@ -5,5 +5,5 @@
 #include "Divisible.h"
 
 void Divisible::hello() {
-    std::cout << "Hello!";
+    std::cout << "Hello!\n";
 }
