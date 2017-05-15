@@ -1,6 +1,6 @@
 ## CMake C++ Project Structure Template
 
-This project, dirivative of the [CMake Tutorial](https://cmake.org/cmake-tutorial/), is aimed at showing a preferred "common" CMake/C++ project structure.
+This project, derivative of the [CMake Tutorial](https://cmake.org/cmake-tutorial/), is aimed at showing a preferred "common" CMake/C++ project structure.
 
 If your project is mulit-language, and you absolutely have to keep them together, make the root one level above, and create folders such as "cpp" and "ruby", or "python", etc.
 
@@ -10,23 +10,38 @@ By "exporting a component" we mean that the component is meant to be consumed by
 
 ### Example Project
 
-For the simplicity sake, we'll build a tool that for every input number prints out if it's divisible by a particular number, that can also be supplied as an argument, or defaults to 2. It's very simple, and we'll call it **divisible**, and that name will now be our project's name too.
+For the simplicity sake, we'll build a tool that for every input number prints out if it's divisible by a particular number, that can also be supplied as an argument that would override the default value of 2. We'll call this tool **divisible**, and that name will now be our project's name too.
 
-Our goal is to have:
-
+Our goal is to have a working binary, such as :
 
 ```bash
-bin/divisible [ -h/--help ] [ -d/--denominator N ] value
+$ bin/divisible [ -h/--help ] [ -m/--modulo ] [ -d/--denominator N ] value
+
+# eg:
+$ bin/divisible -d 17 34
+yes, 17 x 2 is 34
+
+$ bin/divisible -d 10 -m 45
+45 modulo 10 is 5 
+```
+
+And C++ usage:
+
+```C++
+include <divisible>
+
+Divisible::Calculator.new(int denominator)
+
 ```
 
 Sources:
 
- * `src/divisible` — C++ code that ultimately compiles into a library
+ * `src/divisible/*` — C++ code that ultimately compiles into a library
+ * We'll also build a library `libdivisible.a` and install into `lib/`
  * `src/cli.cpp` C++ CLI interface parser that parses arguments and flags passed to a binary
- * a tiny `src/main.cpp` that links with both of the above
+ * a tiny `src/main.cpp` that calls into the CLI, which then calls the library.
  
 Tests: 
-
 
  * A `test` folder with the automated tests and fixtures that mimics the directory structure of `src`.
  * For every C++ file in `src/A/B/<name>.cpp` there is a corresponding test file `test/A/B/<name>_test.cpp`

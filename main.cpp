@@ -1,6 +1,8 @@
 #include <iostream>
+#include "src/Divisible.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    Divisible divisible = Divisible();
+    divisible.hello();
     return 0;
 }
