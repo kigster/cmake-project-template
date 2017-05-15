@@ -28,7 +28,6 @@
 *.exe
 *.out
 *.app
-.idea/
 
 **/cmake-build-debug
 **/CMakeCache.txt
