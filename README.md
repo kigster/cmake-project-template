@@ -15,30 +15,31 @@ For the simplicity sake, we'll build a tool that for every input number prints o
 Our goal is to have a working binary, such as :
 
 ```bash
-$ bin/divisible [ -h/--help ] [ -m/--modulo ] [ -d/--denominator N ] value
+$ bin/divis [ -h/--help ] [ -m/--modulo ] [ -d/--denominator N ] value
 
 # eg:
-$ bin/divisible -d 17 34
+$ bin/divis -d 17 34
 yes, 17 x 2 is 34
 
-$ bin/divisible -d 10 -m 45
+$ bin/divis -d 10 -m 45
 45 modulo 10 is 5 
 ```
 
 And C++ usage:
 
 ```C++
-include <divisible>
+#include <iostream>
+#include <divisible>
 
-Divisible::Calculator.new(int denominator)
+std::cout << Divisible.new(int denominator).modulo();
 
 ```
 
 Sources:
 
- * `src/divisible/*` — C++ code that ultimately compiles into a library
+ * `src/*` — C++ code that ultimately compiles into a library
  * We'll also build a library `libdivisible.a` and install into `lib/`
- * `src/cli.cpp` C++ CLI interface parser that parses arguments and flags passed to a binary
+ * `src/CLI.cpp` C++ CLI interface parser that parses arguments and flags passed to a binary
  * a tiny `src/main.cpp` that calls into the CLI, which then calls the library.
  
 Tests: 
@@ -65,8 +66,12 @@ divisible/
        extern/          -> external libraries if they must be included
       
    src/                 -> sources of the project
-       cli.cpp          -> the CLI argument parser/wrapper
+       CLI.cpp          -> the CLI argument parser/wrapper
        main.cpp         -> small main.cpp that calls into the CLI module
+       divisible/       -> cmake project that produces divisible library
+          CMakeLists.txt
+          Divisible.cpp
+          Divisible.h
    test/                -> sources for all the tests
        bin/             -> where the binary `test-runner` is installed
        lib/             -> where any external libraries live
