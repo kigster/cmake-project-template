@@ -48,6 +48,7 @@ lib/*
 
 **/divis
 
+.build/
 
 # User-specific stuff:
 .idea/**/workspace.xml
