@@ -1,7 +1,7 @@
 //
 // Created by Konstantin Gredeskoul on 5/16/17.
 //
-#include "divisible/divisible.h"
+#include "divisible.h"
 #include "gtest/gtest.h"
 using namespace std;
 

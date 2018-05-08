@@ -8,7 +8,7 @@ set(SOURCE_FILES main.cpp src/divisible_test.cpp)
 
 add_subdirectory(lib/googletest)
 
-include_directories(DIVISIBLE_INCLUDE_DIR)
+include_directories(${DIVISIBLE_INCLUDE_DIR})
 include_directories(lib/googletest/googletest/include)
 
 add_executable(test_runner ${SOURCE_FILES})
