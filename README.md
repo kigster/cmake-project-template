@@ -1,6 +1,8 @@
 [![Build Status](https://travis-ci.org/kigster/cmake-project-template.svg?branch=master)](https://travis-ci.org/kigster/cmake-project-template)
 
-# Divisor: CMake C++ Project Template
+# CMake C++ Project Template
+
+### Division with a remainder library
 
 Thank you for your interest in this project!
 
@@ -10,11 +12,11 @@ Do you need some easy-to-use starting point, but one that has the basic moving p
 
 Do you believe in test-driven development, or at the very lest — write your tests *together* with the feature code? If so you'd want to start your project pre-integrated with a good testing framework.
 
-Divisor is a minimal project and when built it produces:
+Divider is a minimal project that's kept deliberately very small. When you build it using CMake/make (see below) it generates:
 
- * A tiny **static library** called `division`.
- * **A command line binary `divider`**, which links with the library, and computes modulo of its argument over 2, or the third argument.
- * **An executable unit test** `divider_tests`  using [Google Test library](https://github.com/google/googletest)
+ 1. A tiny **static library** `lib/libdivision.a`.
+ 2. **A command line binary `bin/divider`**, which links with the library, and computes modulo of its argument over 2, or the third argument.
+ 3. **An executable unit test** `bin/divider_tests`  using [Google Test library](https://github.com/google/googletest)
  
 ## Usage
 
