@@ -1,0 +1,52 @@
+# Build matrix / environment variable are explained on:
+# http://about.travis-ci.org/docs/user/build-configuration/
+# This file can be validated on:
+# http://lint.travis-ci.org/
+
+install:
+# /usr/bin/gcc is 4.6 always, but gcc-X.Y is available.
+- |
+  sudo apt-get update -y && \
+  sudo apt-get upgrade -y && \
+  sudo apt-get dist-upgrade -y && \
+  sudo apt-get install build-essential software-properties-common -y && \
+  sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y && \
+  sudo apt-get update -y && \
+  sudo apt-get install gcc-7 g++-7 -y && \
+  sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 60 --slave /usr/bin/g++ g++ /usr/bin/g++-7 && \
+  sudo update-alternatives --config gcc
+- if [[ "$CXX" == "g++" ]]; then export CXX="g++-7" CC="gcc-7"; fi
+# /usr/bin/clang is 3.4, lets override with modern one.
+- if [ "$CXX" = "clang++" ] && [ "$TRAVIS_OS_NAME" = "linux" ]; then export CXX="clang++-3.7" CC="clang-3.7"; fi
+- echo ${PATH}
+- echo ${CXX}
+- ${CXX} --version
+- ${CXX} -v
+- cmake --version
+
+addons:
+  apt:
+    # List of whitelisted in travis packages for ubuntu-precise can be found here:
+    #   https://github.com/travis-ci/apt-package-whitelist/blob/master/ubuntu-precise
+    # List of whitelisted in travis apt-sources:
+    #   https://github.com/travis-ci/apt-source-whitelist/blob/master/ubuntu.json
+    sources:
+    - ubuntu-toolchain-r-test
+    - llvm-toolchain-precise-3.7
+    packages:
+    - gcc
+    - g++
+    - clang-3.7
+    - valgrind
+os:
+  - linux
+  - osx
+language: cpp
+compiler:
+  - gcc
+  - clang
+script: ./run.sh
+env:
+notifications:
+  email: false
+sudo: false

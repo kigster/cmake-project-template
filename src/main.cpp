@@ -1,25 +1,25 @@
-#include "divisible.h"
+#include <division.h>
 
 int main(int argc, const char *argv[]) {
-    int denominator = 2;
-    int number;
+  Fraction f;
 
-    // ensure the correct number of parameters are used.
-    if (argc == 1) {
-        std::cout << "Usage: divis number [ denominator ]\n";
-        std::cout << "Computes module of number to denominator.\n";
-        return 1;
-    }
+  std::cout << "\nDivider © 2018 Monkey Claps Inc.\n\n";
 
-    if (argc > 1)
-        number = atoi(argv[1]);
+  // ensure the correct number of parameters are used.
+  if (argc < 3) {
+    std::cout << "Usage:\n\tdivider <numerator> <denominator>\n";
+    std::cout << "\nDescription:\n\tComputes the result of a fractional division,\n\tand reports both the result and the remainder.\n";
+    return 1;
+  }
 
-    if (argc > 2)
-        denominator = atoi(argv[2]);
+  f.numerator = atoll(argv[1]);
+  f.denominator = atoll(argv[2]);
 
-    Divisible divisible = Divisible(denominator);
+  Division d = Division(f);
+  DivisionResult r = d.divide();
 
-    std::cout << "Number " << number << " modulo " << denominator << " is = " << divisible.modulo(number) << "\n";
+  std::cout << "Division : " << f.numerator << " / " << f.denominator << " = " << r.division << "\n";
+  std::cout << "Remainder: " << f.numerator << " % " << f.denominator << " = " << r.remainder << "\n";
 
-    return 0;
+  return 0;
 }

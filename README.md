@@ -1,28 +1,75 @@
-## CMake C++ Project Structure Template
+# Divisor: CMake C++ Project Template
 
-This project, derivative of the [CMake Tutorial](https://cmake.org/cmake-tutorial/), is aimed at showing a preferred "common" CMake/C++ project structure.
+Thank you for your interest in this project!
 
-If your project is mulit-language, and you absolutely have to keep them together, make the root one level above, and create folders such as "cpp" and "ruby", or "python", etc.
+Are you just starting with `CMake` or C++? 
 
-### Project Intention and Structure
+Do you need some easy-to-use starting point, but one that has the basic moving parts you are likely going to need on any medium sized project?
 
-By "exporting a component" we mean that the component is meant to be consumed by other projects or developers. IE. it's public, not private to the project.
+Do you believe in test-driven development, or at the very lest — write your tests *together* with the feature code? If so you'd want to start your project pre-integrated with a good testing framework.
 
-### Example Project
+Divisor is a minimal project and when built it produces:
 
-For the simplicity sake, we'll build a tool that for every input number prints out if it's divisible by a particular number, that can also be supplied as an argument that would override the default value of 2. We'll call this tool **divisible**, and that name will now be our project's name too.
+ * **A command line binary `divisor`** that computes modulo of its argument over 2, or the third argument.
+ * **An executable unit test**  using [Google Test library](https://github.com/google/googletest)
+ 
+## Usage
+
+### Prerequisites
+
+You need:
+
+ * C++ compiler
+ * CMake 3.2+ installed (on a Mac, run `brew install cmake`)
+ * If you prefer to code in a great IDE, I highly recommend [Jetbrains CLion](https://www.jetbrains.com/clion/). It is fully compatible with this project.
+
+### Building on the Command Line
+
+Follow the steps:
+
+```bash
+$ cd ${insert your workspace folder here}
+$ git clone https://github.com/kigster/cmake-project-template 
+$ cd cmake-project-template
+``` 
+
+Now we should be in the project's top level folder. First step is to remove (any possible existing) and re-create the 'build' folder
+
+
+```bash
+$ rm -rf build && mkdir build
+$ cd build
+$ cmake ..
+$ make && make install
+```
+
+### Building in CLion
+
+Before starting CLion, I recommend removing any previous `build` folder with `rm -rf build`.
+
+Next, start CLion, and open the project's top level folder. CLion should automatically detect the project and run CMake file, which generates (git-ignored) Makefiles — the regular old-school C Makefiles.
+
+Select menu option **Run ➜ Build**, and then **Run ➜ Install**.
+
+Hopefully you get no errors, and the project builds.
+
+
+### Example Project — "Divis"
+
+For simplicity's sake  we'll build a simple command line tool that for every input number prints out if it's libdivision by two. Having said that, the denominator can also be supplied as an argument.
+
+We'll call this tool **libdivision**, and that name will now be our project's name too.
 
 Our goal is to have a working binary, such as :
 
 ```bash
-$ bin/divis [ -h/--help ] [ -m/--modulo ] [ -d/--denominator N ] value
+$ bin/divis value [ denominator ]
 
-# eg:
-$ bin/divis -d 17 34
-yes, 17 x 2 is 34
+❯ src/divis 34 6
+Number 34 modulo 6 is = 4
 
-$ bin/divis -d 10 -m 45
-45 modulo 10 is 5 
+❯ src/divis 10 454
+Number 10 modulo 454 is = 10
 ```
 
 And C++ usage:
@@ -93,3 +140,8 @@ Bug reports and pull requests are welcome on GitHub at [https://github.com/kigst
 ### License
 
 **CMake Project Template** is &copy; 2017 Konstantin Gredeskoul, available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT). 
+
+### Acknowledgements
+
+ sThis project is a derivative of the [CMake Tutorial](https://cmake.org/cmake-tutorial/), and is aimed at saving time for starting new projects in C++ that use CMake and GoogleTest.
+
