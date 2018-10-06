@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/kigster/cmake-project-template.svg?branch=master)](https://travis-ci.org/kigster/cmake-project-template)
+
 # Divisor: CMake C++ Project Template
 
 Thank you for your interest in this project!
