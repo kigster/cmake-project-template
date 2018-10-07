@@ -6,7 +6,7 @@
 
 Thank you for your interest in this project!
 
-Are you just starting with `CMake` or C++? 
+Are you just starting with `CMake` or C++?
 
 Do you need some easy-to-use starting point, but one that has the basic moving parts you are likely going to need on any medium sized project?
 
@@ -17,7 +17,7 @@ Divider is a minimal project that's kept deliberately very small. When you build
  1. A tiny **static library** `lib/libdivision.a`.
  2. **A command line binary `bin/divider`**, which links with the library, and computes modulo of its argument over 2, or the third argument.
  3. **An executable unit test** `bin/divider_tests`  using [Google Test library](https://github.com/google/googletest)
- 
+
 ## Usage
 
 ### Prerequisites
@@ -34,9 +34,9 @@ First we need to check out the git repo:
 
 ```bash
 $ cd ${insert your workspace folder here}
-$ git clone https://github.com/kigster/cmake-project-template 
+$ git clone https://github.com/kigster/cmake-project-template
 $ cd cmake-project-template
-``` 
+```
 
 Now we should be in the project's top level folder. First step is to remove (any possible existing) and re-create the 'build' folder
 
@@ -77,7 +77,7 @@ For simplicity's sake  we'll build a simple command line tool that for every inp
 
 We'll call this library **division**, and that name will now be our project's name too.
 
-Our goal is to have a working binary, such as :
+Our goal is to have a working binary, such as:
 
 ```bash
 $ bin/divider value [ denominator ]
@@ -106,7 +106,7 @@ std::cout << Division(f).divide();
  * `test/src` — C++ test suite
  * `bin/`, `lib`, `include` are all empty directories, until the `make install` install the project artifacts there.
 
-Tests: 
+Tests:
 
  * A `test` folder with the automated tests and fixtures that mimics the directory structure of `src`.
  * For every C++ file in `src/A/B/<name>.cpp` there is a corresponding test file `test/A/B/<name>_test.cpp`
@@ -115,7 +115,7 @@ Tests:
 
 #### Contributing
 
-**Pull Requests are WELCOME!** Please submit any fixes or improvements, and I promise to review it as soon as I can at the project URL: 
+**Pull Requests are WELCOME!** Please submit any fixes or improvements, and I promise to review it as soon as I can at the project URL:
 
  * [Project Github Home](https://github.com/kigster/cmake-project-template)
  * [Submit Issues](https://github.com/kigster/cmake-project-template/issues)
@@ -123,11 +123,10 @@ Tests:
 
 ### License
 
-&copy; 2017-2018 Konstantin Gredeskoul. 
+&copy; 2017-2018 Konstantin Gredeskoul.
 
 Open sourced under MIT license, the terms of which can be read here — [MIT License](http://opensource.org/licenses/MIT).
 
 ### Acknowledgements
 
 This project is a derivative of the [CMake Tutorial](https://cmake.org/cmake-tutorial/), and is aimed at saving time for starting new projects in C++ that use CMake and GoogleTest.
-

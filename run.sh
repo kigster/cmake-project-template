@@ -8,6 +8,7 @@ else
 fi 
 
 set -e
+
 root=$(pwd)
 
 br
@@ -16,19 +17,17 @@ br
 p "Cleaning output folders..."
 exe "rm -rf bin/* include/* lib/*"
 
-br
-
 printf "${bldgrn}Build Environment Versions:${clr}\n"
-printf "   GCC : \n\n${bldylw}%s${clr}\n" "$(gcc --version)"
-printf "   git : ${bldblu}%s${clr}\n" "$(git --version)"
-printf " CMake : ${bldred}%s${clr}\n" "$(cmake --version)"
+printf "${bldylw}   GCC : \n${bldblk}%s${clr}\n" "$(gcc --version)"
+printf "${bldylw}   git : ${bldblk}%s${clr}\n" "$(git --version)"
+printf "${bldylw} CMake : ${bldblk}%s${clr}\n" "$(cmake --version)"
+printf "${bldylw}  Make : ${bldblk}%s${clr}\n" "$(make -version)"
 
-printf ${bldgrn}
 exe "git submodule update --init --recursive"
+exe "mkdir -p build/run && cd build/run"
 
-exe "mkdir -p build && cd build"
-printf ${bldblu}
-cmake .. && make -j 12 && make install | egrep -v 'gmock|gtest'
+printf ${clr}
+exe "cmake ../.. && make -j 12 && make install | egrep -v 'gmock|gtest'"
 
 cd ${root}
 
@@ -38,7 +37,5 @@ cd ${root}
 }
 
 exe bin/divider_tests
-
-
-
+exe bin/divider 11 7
 

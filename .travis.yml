@@ -23,7 +23,6 @@ matrix:
             - clang-3.7
       env:
         - MATRIX_EVAL="CC=clang-3.7 && CXX=clang++-3.7"
-
     # works on Precise and Trusty
 #    - os: linux
 #      addons:

@@ -51,13 +51,17 @@ h1() {
 }
 
 hr() {
- ::say '—————————————————————————————————————————————————————————————————————'
+  printf "${bldwht}—————————————————————————————————————————————————————————————————————\n"
 }
 
 exe() {
   local command="$*"
-  ::say " [ running ] ${bldylw}${command}"
+  br
+  ::say "\$ ${bldwht}${command}"
+  br
+  printf "${bldblk}"
   eval "${command}"
+  hr
 }
 
 br() {
@@ -67,6 +71,5 @@ br() {
 # private
 
 ::say() {
-  local clr=$1; shift
-  printf "${bldblu}$*${clr}\n"
+  printf "${bldylw}❯❯❯ ${clr}$*${clr}\n"
 }
