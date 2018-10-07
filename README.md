@@ -25,12 +25,12 @@ Divider is a minimal project that's kept deliberately very small. When you build
 You need:
 
  * C++ compiler
- * CMake 3.2+ installed (on a Mac, run `brew install cmake`)
+ * CMake 3.1+ installed (on a Mac, run `brew install cmake`)
  * If you prefer to code in a great IDE, I highly recommend [Jetbrains CLion](https://www.jetbrains.com/clion/). It is fully compatible with this project.
 
-### Building on the Command Line
+### Building Project
 
-Follow the steps:
+First we need to check out the git repo:
 
 ```bash
 $ cd ${insert your workspace folder here}
@@ -40,28 +40,31 @@ $ cd cmake-project-template
 
 Now we should be in the project's top level folder. First step is to remove (any possible existing) and re-create the 'build' folder
 
-**Building Using the Script:**
+There is a handy BASH script (used by the Travis CI) that you can run locally. It builds the project, and runs all the tests
+
+####  Building Using the Script
 
 ```bash
 ./run.sh
 ```
 
-**Or Manually:**
+#### Building Manually
 
 ```bash
 $ rm -rf build && mkdir build
 $ cd build
 $ cmake ..
 $ make && make install
-$ ../bin/divider_tests
-$ ../bin/divider 234 5431
+$ cd ..
+$ bin/divider_tests
+$ bin/divider 234 5431
 ```
 
 ### Building in CLion
 
 Before starting CLion, I recommend removing any previous `build` folder with `rm -rf build`.
 
-Next, start CLion, and open the project's top level folder. CLion should automatically detect the project and run CMake file, which generates (git-ignored) Makefiles — the regular old-school C Makefiles.
+Next, start CLion, and open the project's top level folder. CLion should automatically detect the top level `CMakeLists.txt` file, and build everything.
 
 Select menu option **Run ➜ Build**, and then **Run ➜ Install**.
 
@@ -99,6 +102,9 @@ std::cout << Division(f).divide();
 ## File Locations
 
  * `src/*` — C++ code that ultimately compiles into a library
+ * `test/lib` — C++ libraries used for tests (eg, Google Test)
+ * `test/src` — C++ test suite
+ * `bin/`, `lib`, `include` are all empty directories, until the `make install` install the project artifacts there.
 
 Tests: 
 
@@ -107,16 +113,21 @@ Tests:
  * Tests compile into a single binary `test/bin/runner` that is run on a command line to run the tests.
  * `test/lib` folder with a git submodule in `test/lib/googletest`, and possibly other libraries.
 
-
 #### Contributing
 
-Bug reports and pull requests are welcome on GitHub at [https://github.com/kigster/cmake-project-template](https://github.com/kigster/cmake-project-template)
+**Pull Requests are WELCOME!** Please submit any fixes or improvements, and I promise to review it as soon as I can at the project URL: 
+
+ * [Project Github Home](https://github.com/kigster/cmake-project-template)
+ * [Submit Issues](https://github.com/kigster/cmake-project-template/issues)
+ * [Pull Requests](https://github.com/kigster/cmake-project-template/pulls)
 
 ### License
 
-**CMake Project Template** is &copy; 2017-2018 Konstantin Gredeskoul, available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+&copy; 2017-2018 Konstantin Gredeskoul. 
+
+Open sourced under MIT license, the terms of which can be read here — [MIT License](http://opensource.org/licenses/MIT).
 
 ### Acknowledgements
 
- sThis project is a derivative of the [CMake Tutorial](https://cmake.org/cmake-tutorial/), and is aimed at saving time for starting new projects in C++ that use CMake and GoogleTest.
+This project is a derivative of the [CMake Tutorial](https://cmake.org/cmake-tutorial/), and is aimed at saving time for starting new projects in C++ that use CMake and GoogleTest.
 
