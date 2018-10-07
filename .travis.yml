@@ -25,31 +25,31 @@ matrix:
         - MATRIX_EVAL="CC=clang-3.7 && CXX=clang++-3.7"
 
     # works on Precise and Trusty
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-            - llvm-toolchain-precise-3.8
-          packages:
-            - clang-3.8
-      env:
-        - MATRIX_EVAL="CC=clang-3.8 && CXX=clang++-3.8"
-        - CXXFLAGS="-stdlib=libc++"
-
-    # works on Trusty
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-            - llvm-toolchain-trusty-3.9
-          packages:
-            - clang-3.9
-      env:
-        - MATRIX_EVAL="CC=clang-3.9 && CXX=clang++-3.9"
-        - CXXFLAGS="-stdlib=libc++"
-
+#    - os: linux
+#      addons:
+#        apt:
+#          sources:
+#            - ubuntu-toolchain-r-test
+#            - llvm-toolchain-precise-3.8
+#          packages:
+#            - clang-3.8
+#      env:
+#        - MATRIX_EVAL="CC=clang-3.8 && CXX=clang++-3.8"
+#        - CXXFLAGS="-stdlib=libc++"
+#
+#    # works on Trusty
+#    - os: linux
+#      addons:
+#        apt:
+#          sources:
+#            - ubuntu-toolchain-r-test
+#            - llvm-toolchain-trusty-3.9
+#          packages:
+#            - clang-3.9
+#      env:
+#        - MATRIX_EVAL="CC=clang-3.9 && CXX=clang++-3.9"
+#        - CXXFLAGS="-stdlib=libc++"
+#
     # works on Trusty
     - os: linux
       addons:
