@@ -26,7 +26,7 @@ printf "${bldylw}  Make : ${bldblk}%s${clr}\n" "$(make -version)"
 exe "git submodule update --init --recursive"
 exe "mkdir -p build/run && cd build/run"
 
-printf ${clr}
+printf "${clr}"
 exe "cmake ../.. && make -j 12 && make install | egrep -v 'gmock|gtest'"
 
 cd ${root}

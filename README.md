@@ -62,7 +62,7 @@ $ bin/divider 234 5431
 
 ### Building in CLion
 
-Before starting CLion, I recommend removing any previous `build` folder with `rm -rf build`.
+This project comes with `.idea/` folder that should contain everything you need to build this in CLion, including running Google Tests within the IDE. 
 
 Next, start CLion, and open the project's top level folder. CLion should automatically detect the top level `CMakeLists.txt` file, and build everything.
 

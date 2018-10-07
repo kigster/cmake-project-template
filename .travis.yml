@@ -73,13 +73,6 @@ matrix:
       env:
         - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
 
-before_install:
-    - eval "${MATRIX_EVAL}"
-    - git submodule init 
-    - git submodule update
-script: 
-  - mkdir build
-  - cd build
-  - cmake ..
-  - make && make install
-  - ../bin/divider_tests
+script:
+  - ./run.sh
+  - ./bin/divider_tests
