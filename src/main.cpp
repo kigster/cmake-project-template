@@ -1,14 +1,16 @@
 #include <division.h>
 
+static const char *const HEADER = "\nDivider © 2018 Monkey Claps Inc.\n\n";
+static const char *const USAGE = "Usage:\n\tdivider <numerator> <denominator>\n\nDescription:\n\tComputes the result of a fractional division,\n\tand reports both the result and the remainder.\n";
+
 int main(int argc, const char *argv[]) {
   Fraction f;
 
-  std::cout << "\nDivider © 2018 Monkey Claps Inc.\n\n";
+  std::cout << HEADER;
 
   // ensure the correct number of parameters are used.
   if (argc < 3) {
-    std::cout << "Usage:\n\tdivider <numerator> <denominator>\n";
-    std::cout << "\nDescription:\n\tComputes the result of a fractional division,\n\tand reports both the result and the remainder.\n";
+    std::cout << USAGE;
     return 1;
   }
 
@@ -16,10 +18,13 @@ int main(int argc, const char *argv[]) {
   f.denominator = atoll(argv[2]);
 
   Division d = Division(f);
-  DivisionResult r = d.divide();
+  try {
+    DivisionResult r = d.divide();
 
-  std::cout << "Division : " << f.numerator << " / " << f.denominator << " = " << r.division << "\n";
-  std::cout << "Remainder: " << f.numerator << " % " << f.denominator << " = " << r.remainder << "\n";
-
+    std::cout << "Division : " << f.numerator << " / " << f.denominator << " = " << r.division << "\n";
+    std::cout << "Remainder: " << f.numerator << " % " << f.denominator << " = " << r.remainder << "\n";
+  } catch (DivisionByZero) {
+    std::cout << "Can not divide by zero, Homer. Sober up!\n";
+  }
   return 0;
 }

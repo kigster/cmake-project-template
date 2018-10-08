@@ -1,0 +1,10 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="Rubocop" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="RubyQuotedStringsInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="RubyResolve" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="warnImplicitResults" value="false" />
+    </inspection_tool>
+  </profile>
+</component>

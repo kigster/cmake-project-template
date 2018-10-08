@@ -1,12 +1,9 @@
 cmake_minimum_required(VERSION 3.2)
 project(division C CXX)
 
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -O3")
-
 set(SOURCE_FILES
-        division.h
-        division.cpp
+    division.h
+    division.cpp
 )
 
 add_library(division SHARED STATIC ${SOURCE_FILES})

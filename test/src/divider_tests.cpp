@@ -6,6 +6,7 @@
 
 using namespace std;
 
+
 #define VI vector<long long>
 
 class DividerTest : public ::testing::Test {
@@ -23,9 +24,9 @@ protected:
   };
 
   virtual void verify(int index) {
-    Fraction f = Fraction{ numerators.at(index), denominators.at(index) };
-    DivisionResult expected = DivisionResult{ divisions.at(index), remainders.at(index) };
-    DivisionResult result = Division(f).divide();
+    Fraction       f        = Fraction{numerators.at(index), denominators.at(index)};
+    DivisionResult expected = DivisionResult{divisions.at(index), remainders.at(index)};
+    DivisionResult result   = Division(f).divide();
     EXPECT_EQ(result.division, expected.division);
     EXPECT_EQ(result.remainder, expected.remainder);
   }
@@ -47,17 +48,16 @@ TEST_F(DividerTest, Long_DivideBy_Long) {
   verify(3);
 }
 
-TEST_F(DividerTest, ComputeWithDenominator0) {
-  Division d = Division(Fraction{1,0});
+TEST_F(DividerTest, DivisionByZero) {
+  Division d = Division(Fraction{1, 0});
   try {
     d.divide();
-    FAIL() << "Expected to throw DivisionByZero";
+    FAIL() << "Expected divide() method to throw DivisionByZeroException";
   } catch (DivisionByZero const &err) {
-    EXPECT_EQ(err.what(), "Can not libdivision by zero!");
-    SUCCEED();
+    EXPECT_EQ(err.what(), DIVISION_BY_ZERO_MESSAGE);
   }
   catch (...) {
-    FAIL() << "Expected DivisionByZero!";
+    FAIL() << "Expected DivisionByZeroException!";
   }
 }
 

@@ -56,3 +56,4 @@ build/run/*
 include/*
 lib/*
 bin/*
+.bash/
