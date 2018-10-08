@@ -14,53 +14,69 @@ Do you believe in test-driven development, or at the very lest — write your te
 
 Divider is a minimal project that's kept deliberately very small. When you build it using CMake/make (see below) it generates:
 
- 1. A tiny **static library** `lib/libdivision.a`.
- 2. **A command line binary `bin/divider`**, which links with the library, and computes modulo of its argument over 2, or the third argument.
- 3. **An executable unit test** `bin/divider_tests`  using [Google Test library](https://github.com/google/googletest)
+ 1. A tiny **static library** `lib/libdivision.a`,
+ 2. **A command line binary `bin/divider`**, which links with the library,
+ 3. **An executable unit test** `bin/divider_tests`  using [Google Test library](https://github.com/google/googletest).
+ 4. **An optional BASH build script** `./run.sh` that is also used by the Travis CI.
+
 
 ## Usage
 
 ### Prerequisites
 
-You need:
+You will need:
 
- * C++ compiler
+ * A modern C/C++ compiler
  * CMake 3.1+ installed (on a Mac, run `brew install cmake`)
  * If you prefer to code in a great IDE, I highly recommend [Jetbrains CLion](https://www.jetbrains.com/clion/). It is fully compatible with this project.
 
-### Building Project
+### Building The Project
+
+#### Git Clone
 
 First we need to check out the git repo:
 
 ```bash
 $ cd ${insert your workspace folder here}
-$ git clone https://github.com/kigster/cmake-project-template
-$ cd cmake-project-template
+$ git clone https://github.com/kigster/cmake-project-template my-project
+$ cd my-project
 ```
 
-Now we should be in the project's top level folder. First step is to remove (any possible existing) and re-create the 'build' folder
+Now we should be in the project's top level folder. 
 
-There is a handy BASH script (used by the Travis CI) that you can run locally. It builds the project, and runs all the tests
+#### Project Structure
+
+There are three empty folders: `lib`, `bin`, and `include`. Those are populated by `make install`.
+
+The rest should be obvious: `src` is the sources, and `test` is where we put our unit tests.
+
+Now we can build this project, and below we show three separate ways to do so.
+
+#### Building Manually
+
+```bash
+$ rm -rf build/manual && mkdir build/manual
+$ cd build/manual
+$ cmake ../..
+$ make && make install
+$ cd ../..
+
+# Run the tests:
+$ bin/divider_tests 
+
+# Run the binary:
+$ bin/divider 234 5431
+```
 
 ####  Building Using the Script
+
+There is a handy BASH script (used by the Travis CI) that you can run locally. It builds the project, and runs all the tests
 
 ```bash
 ./run.sh
 ```
 
-#### Building Manually
-
-```bash
-$ rm -rf build && mkdir build
-$ cd build
-$ cmake ..
-$ make && make install
-$ cd ..
-$ bin/divider_tests
-$ bin/divider 234 5431
-```
-
-### Building in CLion
+#### Building in CLion
 
 This project comes with `.idea/` folder that should contain everything you need to build this in CLion, including running Google Tests within the IDE. 
 
@@ -68,19 +84,16 @@ Next, start CLion, and open the project's top level folder. CLion should automat
 
 Select menu option **Run ➜ Build**, and then **Run ➜ Install**.
 
-Hopefully you get no errors, and the project builds.
+![CLION](doc/cmake-clion.png)
 
+## Feature Description
 
-## Functionality
+To make it easy to branch off from this template, the example is minimal, but it works, compiles and is tested.
 
-For simplicity's sake  we'll build a simple command line tool that for every input number prints out if it's libdivision by two. Having said that, the denominator can also be supplied as an argument.
-
-We'll call this library **division**, and that name will now be our project's name too.
-
-Our goal is to have a working binary, such as:
+We build a static library that, given a simple fraction will return the integer result of the division, and the remainder.
 
 ```bash
-$ bin/divider value [ denominator ]
+$ bin/divider numerator denominator
 
 # eg:
 $ divider 234 5435
