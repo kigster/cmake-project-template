@@ -113,8 +113,11 @@ And C++ usage:
 #include <iostream>
 #include <division>
 
-Fraction f = Fraction{25, 7};
-std::cout << Division(f).divide();
+Fraction       f = Fraction{25, 7};
+DivisionResult r = Division(f).divide();
+
+std::cout << "Result of the division is " << r.division;
+std::cout << "Remainder of the division is " << r.remainder;
 ```
 
 ## File Locations
