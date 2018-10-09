@@ -57,3 +57,5 @@ include/*
 lib/*
 bin/*
 .bash/
+bin/bootstrap
+bin/lib-bash

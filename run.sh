@@ -19,32 +19,30 @@
 export _s_
 export ProjectRoot=$(pwd)
 export BuildDir="${ProjectRoot}/build/run"
-export BashLibRoot="${ProjectRoot}/.bash"
+export BashLibRoot="${ProjectRoot}/bin/lib-bash"
 export LibBashRepo="https://github.com/kigster/lib-bash"
 
 # We are using an awesome BASH library `lib-bash` for prettifying the output, and
 # running commands through their LibRun framework.
 divider::lib-bash() {
-  [[ ! -d ${BashLibRoot} ]] && git clone ${LibBashRepo} ${BashLibRoot} 2>&1 | cat >/dev/null
+  [[ ! -d ${BashLibRoot} ]] && curl -fsSL https://git.io/fxZSi | /usr/bin/env bash
   [[ ! -d ${BashLibRoot} ]] && { 
     printf "Unable to git clone lib-bash repo from ${LibBashRepo}"
     exit 1
   }
   
-  if [[ -f ${BashLibRoot}/lib/Loader.bash ]]; then
+  if [[ -f ${BashLibRoot}/Loader.bash ]]; then
     cd ${BashLibRoot} > /dev/null
     git reset --hard origin/master 2>&1 | cat >/dev/null
     git pull 2>&1 | cat >/dev/null
-    [[ -f lib/Loader.bash ]] && source lib/Loader.bash
+    [[ -f Loader.bash ]] && source Loader.bash
     cd ${ProjectRoot}
   else
     printf "\nERROR: unable to find lib-bash library from ${LibBashRepo}!\n"
     exit 1
   fi
 
-  run::set-all-commands 
-  export LibRun__ShowCommandOutput__Default=${False}
-  export LibRun__AbortOnError__Default=${True}
+  run::set-all show-output-off abort-on-error
 }
 
 divider::header() {
@@ -66,7 +64,7 @@ divider::setup() {
 
 divider::clean() {
   hl::subtle "Cleaning output folders..."
-  run 'rm -rf bin/* include/* lib/*'
+  run 'rm -rf bin/d* include/d* lib/*'
 }
 
 divider::build() {
@@ -79,8 +77,8 @@ divider::build() {
 
 divider::tests() {
   if [[ -f bin/divider_tests ]]; then
-    export LibRun__ShowCommandOutput=${True}
-    run "bin/divider_tests"
+    run::set-next show-output-on
+    run "echo && bin/divider_tests"
   else
     printf "${bldred}Can't find installed executable ${bldylw}bin/divider_tests.${clr}\n"
     exit 2
@@ -93,12 +91,12 @@ divider::examples() {
     exit 3
   }
 
-  export LibRun__ShowCommandOutput=${True}
-  export LibRun__ShowCommandOutput__Default=${True}
+  run::set-all show-output-on
+
   hr
   run "bin/divider 11 7"
   hr
-  run "bin/divider 1298798375 9475989787"
+  run "bin/divider 1298798375 94759897"
   hr
   run "bin/divider 78 17"
   hr
