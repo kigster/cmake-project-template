@@ -25,9 +25,16 @@ export LibBashRepo="https://github.com/kigster/lib-bash"
 # We are using an awesome BASH library `lib-bash` for prettifying the output, and
 # running commands through their LibRun framework.
 divider::lib-bash() {
-  [[ ! -d ${BashLibRoot} ]] && git clone ${LibBashRepo} ${BashLibRoot} 1>/dev/null
+  [[ ! -d ${BashLibRoot} ]] && git clone ${LibBashRepo} ${BashLibRoot} 2>&1 | cat >/dev/null
+  [[ ! -d ${BashLibRoot} ]] && { 
+    printf "Unable to git clone lib-bash repo from ${LibBashRepo}"
+    exit 1
+  }
+  
   if [[ -f ${BashLibRoot}/lib/Loader.bash ]]; then
-    cd ${BashLibRoot}
+    cd ${BashLibRoot} > /dev/null
+    git reset --hard origin/master 2>&1 | cat >/dev/null
+    git pull 2>&1 | cat >/dev/null
     [[ -f lib/Loader.bash ]] && source lib/Loader.bash
     cd ${ProjectRoot}
   else
@@ -35,6 +42,7 @@ divider::lib-bash() {
     exit 1
   fi
 
+  run::set-all-commands 
   export LibRun__ShowCommandOutput__Default=${False}
   export LibRun__AbortOnError__Default=${True}
 }
@@ -88,7 +96,7 @@ divider::examples() {
   hr
   run "bin/divider 11 7"
   hr
-  run "bin/divider 1298798375 94759o387"
+  run "bin/divider 1298798375 9475989787"
   hr
   run "bin/divider 78 17"
   hr

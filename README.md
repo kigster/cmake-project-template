@@ -40,6 +40,7 @@ First we need to check out the git repo:
 $ cd ${insert your workspace folder here}
 $ git clone https://github.com/kigster/cmake-project-template my-project
 $ cd my-project
+$ git submodule init && git submodule update
 ```
 
 Now we should be in the project's top level folder. 
