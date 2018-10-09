@@ -60,6 +60,8 @@ divider::header() {
 divider::setup() {
   hl::subtle "Creating Build Folder..."
   run "mkdir -p build/run"
+
+  [[ -f .idea/workspace.xml ]] || cp .idea/workspace.xml.example .idea/workspace.xml
 }
 
 divider::clean() {

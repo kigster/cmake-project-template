@@ -79,13 +79,17 @@ There is a handy BASH script (used by the Travis CI) that you can run locally. I
 
 #### Building in CLion
 
-This project comes with `.idea/` folder that should contain everything you need to build this in CLion, including running Google Tests within the IDE. 
+> **NOTE**: Since JetBrains software [does not officially support git submodules](https://youtrack.jetbrains.com/issue/IDEA-64024), you must run `git submodule init && git submodule update` before starting CLion on a freshly checked-out repo.
 
-Next, start CLion, and open the project's top level folder. CLion should automatically detect the top level `CMakeLists.txt` file, and build everything.
+> **NOTE**: We recommend that you copy file `.idea/workspace.xml.example` into `.idea/workspace.xml` **before starting CLion**. It will provide a good starting point for your project's workspace.
+
+Assuming you've done the above two steps, you can start CLion, and open the project's top level folder. CLion should automatically detect the top level `CMakeLists.txt` file and provide you with the full set of build targets.
 
 Select menu option **Run ➜ Build**, and then **Run ➜ Install**.
 
 ![CLION](doc/cmake-clion.png)
+
+The above screenshot is an example of CLion with this project open.
 
 ## Feature Description
 

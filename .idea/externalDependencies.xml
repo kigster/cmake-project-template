@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalDependencies">
+    <plugin id="BashSupport" />
+    <plugin id="Git4Idea" />
+    <plugin id="artsiomch.cmake" />
+    <plugin id="org.intellij.plugins.markdown" />
+  </component>
+</project>
