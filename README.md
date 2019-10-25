@@ -85,7 +85,7 @@ There is a handy BASH script (used by the Travis CI) that you can run locally. I
 
 Assuming you've done the above two steps, you can start CLion, and open the project's top level folder. CLion should automatically detect the top level `CMakeLists.txt` file and provide you with the full set of build targets.
 
-Select menu option **Run ➜ Build**, and then **Run ➜ Install**.
+Select menu option **Build ➜ Build Project**, and then **Build ➜ Install**.
 
 ![CLION](doc/cmake-clion.png)
 
