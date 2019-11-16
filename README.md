@@ -17,8 +17,7 @@ Divider is a minimal project that's kept deliberately very small. When you build
  1. A tiny **static library** `lib/libdivision.a`,
  2. **A command line binary `bin/divider`**, which links with the library,
  3. **An executable unit test** `bin/divider_tests`  using [Google Test library](https://github.com/google/googletest).
- 4. **An optional BASH build script** `./run.sh` that is also used by the Travis CI.
-
+ 4. **An optional BASH build script** `build-and-run` that you can use to quickly test if the project compiles, and runs.
 
 ## Usage
 
@@ -37,13 +36,18 @@ You will need:
 First we need to check out the git repo:
 
 ```bash
-$ cd ${insert your workspace folder here}
-$ git clone https://github.com/kigster/cmake-project-template my-project
-$ cd my-project
-$ git submodule init && git submodule update
+❯ mkdir ~/workspace
+❯ cd ~/workspace
+❯ git clone \
+    https://github.com/kigster/cmake-project-template \
+    my-project
+❯ cd my-project
+❯ bash build-and-run
 ```
 
-Now we should be in the project's top level folder. 
+The output of this script is rather long and is shown [on this screenshot](doc/build-and-run.png).
+
+The script `build-and-run` is a short-cut — you shouldn't really be using this script to build your project, but see how to do it properly below.
 
 #### Project Structure
 
@@ -56,28 +60,67 @@ Now we can build this project, and below we show three separate ways to do so.
 #### Building Manually
 
 ```bash
-$ rm -rf build/manual && mkdir build/manual
-$ cd build/manual
-$ cmake ../..
-$ make && make install
-$ cd ../..
-
-# Run the tests:
-$ bin/divider_tests 
-
-# Run the binary:
-$ bin/divider 234 5431
+❯ rm -rf build && mkdir build
+❯ cd build
+❯ cmake ..
+❯ make && make install
+❯ cd ..
 ```
 
-####  Building Using the Script
 
-There is a handy BASH script (used by the Travis CI) that you can run locally. It builds the project, and runs all the tests
+#### Running the tests
 
 ```bash
-./run.sh
+❯ bin/divider_tests
+[==========] Running 5 tests from 1 test case.
+[----------] Global test environment set-up.
+[----------] 5 tests from DividerTest
+[ RUN      ] DividerTest.5_DivideBy_2
+[       OK ] DividerTest.5_DivideBy_2 (1 ms)
+[ RUN      ] DividerTest.9_DivideBy_3
+[       OK ] DividerTest.9_DivideBy_3 (0 ms)
+[ RUN      ] DividerTest.17_DivideBy_19
+[       OK ] DividerTest.17_DivideBy_19 (0 ms)
+[ RUN      ] DividerTest.Long_DivideBy_Long
+[       OK ] DividerTest.Long_DivideBy_Long (0 ms)
+[ RUN      ] DividerTest.DivisionByZero
+[       OK ] DividerTest.DivisionByZero (0 ms)
+[----------] 5 tests from DividerTest (1 ms total)
+
+[----------] Global test environment tear-down
+[==========] 5 tests from 1 test case ran. (1 ms total)
+[  PASSED  ] 5 tests.
 ```
 
-#### Building in CLion
+#### Running the CLI Executable
+
+Without arguments, it prints out its usage:
+
+```bash
+❯ bin/divider
+
+Divider © 2018 Monkey Claps Inc.
+
+Usage:
+	divider <numerator> <denominator>
+
+Description:
+	Computes the result of a fractional division,
+	and reports both the result and the remainder.
+```
+
+But with arguments, it computes as expected the denominator:
+
+```bash
+❯ bin/divider 112443477 12309324
+
+Divider © 2018 Monkey Claps Inc.
+
+Division : 112443477 / 12309324 = 9
+Remainder: 112443477 % 12309324 = 1659561
+```
+
+### Building in CLion
 
 > **NOTE**: Since JetBrains software [does not officially support git submodules](https://youtrack.jetbrains.com/issue/IDEA-64024), you must run `git submodule init && git submodule update` before starting CLion on a freshly checked-out repo.
 
@@ -85,31 +128,19 @@ There is a handy BASH script (used by the Travis CI) that you can run locally. I
 
 Assuming you've done the above two steps, you can start CLion, and open the project's top level folder. CLion should automatically detect the top level `CMakeLists.txt` file and provide you with the full set of build targets.
 
-Select menu option **Build ➜ Build Project**, and then **Build ➜ Install**.
+Select menu option **Build   ➜ Build Project**, and then **Build ➜ Install**.
 
 ![CLION](doc/cmake-clion.png)
 
 The above screenshot is an example of CLion with this project open.
 
-## Feature Description
-
-To make it easy to branch off from this template, the example is minimal, but it works, compiles and is tested.
+### Using it as a C++ Library
 
 We build a static library that, given a simple fraction will return the integer result of the division, and the remainder.
 
-```bash
-$ bin/divider numerator denominator
+We can use it from C++ like so:
 
-# eg:
-$ divider 234 5435
-
-Division : 234 / 5435 = 0
-Remainder: 234 % 5435 = 234
-```
-
-And C++ usage:
-
-```C++
+```cpp
 #include <iostream>
 #include <division>
 
@@ -144,7 +175,7 @@ Tests:
 
 ### License
 
-&copy; 2017-2018 Konstantin Gredeskoul.
+&copy; 2017-2019 Konstantin Gredeskoul.
 
 Open sourced under MIT license, the terms of which can be read here — [MIT License](http://opensource.org/licenses/MIT).
 

@@ -1,49 +1,35 @@
 #!/usr/bin/env bash
 #
-# © 2018 Konstantin Gredeskoul, All Rights Reserved.
+# © 2018-2019 Konstantin Gredeskoul, All Rights Reserved.
 # MIT License
 #
 # WARNING: This BASH script is completely optional. You don't need it to build this project.
 #
 # If you choose to run this script to build the project, run:
 #
-#     $ ./run.sh
+#     $ ./build-and-run
 #
 # It will clean, build and run the tests.
 #
-#
 
-( [[ -n ${ZSH_EVAL_CONTEXT} && ${ZSH_EVAL_CONTEXT} =~ :file$ ]] || \
-  [[ -n $BASH_VERSION && $0 != "$BASH_SOURCE" ]]) && _s_=1 || _s_=0
+[[ -z $(which git) ]] && {
+  echo "You need git installed. Please run 'xcode-select --install' first."
+  exit 1
+}
 
-export _s_
+export BashMatic="${HOME}/.bashmatic"
+
+[[ -s ${BashMatic}/init.sh ]] || {
+  rm -rf "${BashMatic}" 2>/dev/null
+  git clone https://github.com/kigster/bashmatic "${BashMatic}" 2>&1 1>/dev/null
+}
+
+source "${BashMatic}/init.sh"
+
 export ProjectRoot=$(pwd)
 export BuildDir="${ProjectRoot}/build/run"
 export BashLibRoot="${ProjectRoot}/bin/lib-bash"
 export LibBashRepo="https://github.com/kigster/lib-bash"
-
-# We are using an awesome BASH library `lib-bash` for prettifying the output, and
-# running commands through their LibRun framework.
-divider::lib-bash() {
-  [[ ! -d ${BashLibRoot} ]] && curl -fsSL https://git.io/fxZSi | /usr/bin/env bash
-  [[ ! -d ${BashLibRoot} ]] && { 
-    printf "Unable to git clone lib-bash repo from ${LibBashRepo}"
-    exit 1
-  }
-  
-  if [[ -f ${BashLibRoot}/Loader.bash ]]; then
-    cd ${BashLibRoot} > /dev/null
-    git reset --hard origin/master 2>&1 | cat >/dev/null
-    git pull 2>&1 | cat >/dev/null
-    [[ -f Loader.bash ]] && source Loader.bash
-    cd ${ProjectRoot}
-  else
-    printf "\nERROR: unable to find lib-bash library from ${LibBashRepo}!\n"
-    exit 1
-  fi
-
-  run::set-all show-output-off abort-on-error
-}
 
 divider::header() {
   h1::purple "Fractional Division With Remainder: A CMake Project Template with Tests"
@@ -58,6 +44,7 @@ divider::header() {
 divider::setup() {
   hl::subtle "Creating Build Folder..."
   run "mkdir -p build/run"
+  run "git submodule init && git submodule update"
 
   [[ -f .idea/workspace.xml ]] || cp .idea/workspace.xml.example .idea/workspace.xml
 }
@@ -70,6 +57,7 @@ divider::clean() {
 divider::build() {
   run "cd build/run"
   run "cmake ../.. "
+  run::set-next show-output-on
   run "make -j 12"
   run "make install | egrep -v 'gmock|gtest'"
   run "cd ${ProjectRoot}"
@@ -104,7 +92,6 @@ divider::examples() {
 }
 
 main() {
-  divider::lib-bash
   divider::header
   divider::setup
   divider::build

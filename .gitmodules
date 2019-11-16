@@ -1,3 +1,4 @@
 [submodule "googletest"]
-	path = test/lib/googletest
-	url = https://github.com/google/googletest.git
+  path = test/lib/googletest
+  url = https://github.com/google/googletest.git
+  branch = master
