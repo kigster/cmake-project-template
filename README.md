@@ -61,6 +61,7 @@ Now we can build this project, and below we show three separate ways to do so.
 
 ```bash
 ❯ rm -rf build && mkdir build
+❯ git submodule init && git submodule update
 ❯ cd build
 ❯ cmake ..
 ❯ make && make install
