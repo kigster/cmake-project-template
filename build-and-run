@@ -31,8 +31,8 @@ export BuildDir="${ProjectRoot}/build/run"
 export BashLibRoot="${ProjectRoot}/bin/lib-bash"
 export LibBashRepo="https://github.com/kigster/lib-bash"
 
-divider::header() {
-  h1::purple "Fractional Division With Remainder: A CMake Project Template with Tests"
+divider.header() {
+  h1.purple "Fractional Division With Remainder: A CMake Project Template with Tests"
   local OIFC=${IFC}
   IFS="|" read -r -a gcc_info <<< "$(gcc --version 2>&1 | tr '\n' '|')"
   export IFC=${OIFC}
@@ -41,31 +41,31 @@ divider::header() {
   h1 "${bldylw}CMAKE:  ${bldblu}$(cmake --version | tr '\n' ' ')"
 }
 
-divider::setup() {
-  hl::subtle "Creating Build Folder..."
+divider.setup() {
+  hl.subtle "Creating Build Folder..."
   run "mkdir -p build/run"
   run "git submodule init && git submodule update"
 
   [[ -f .idea/workspace.xml ]] || cp .idea/workspace.xml.example .idea/workspace.xml
 }
 
-divider::clean() {
-  hl::subtle "Cleaning output folders..."
+divider.clean() {
+  hl.subtle "Cleaning output folders..."
   run 'rm -rf bin/d* include/d* lib/*'
 }
 
-divider::build() {
+divider.build() {
   run "cd build/run"
   run "cmake ../.. "
-  run::set-next show-output-on
+  run.set-next show-output-on
   run "make -j 12"
   run "make install | egrep -v 'gmock|gtest'"
   run "cd ${ProjectRoot}"
 }
 
-divider::tests() {
+divider.tests() {
   if [[ -f bin/divider_tests ]]; then
-    run::set-next show-output-on
+    run.set-next show-output-on
     run "echo && bin/divider_tests"
   else
     printf "${bldred}Can't find installed executable ${bldylw}bin/divider_tests.${clr}\n"
@@ -73,13 +73,13 @@ divider::tests() {
   fi
 }
 
-divider::examples() {
+divider.examples() {
   [[ ! -f bin/divider ]] && {
     error "You don't have the cmpiled binary yet".
     exit 3
   }
 
-  run::set-all show-output-on
+  run.set-all show-output-on
 
   hr
   run "bin/divider 11 7"
@@ -92,11 +92,11 @@ divider::examples() {
 }
 
 main() {
-  divider::header
-  divider::setup
-  divider::build
-  divider::tests
-  divider::examples
+  divider.header
+  divider.setup
+  divider.build
+  divider.tests
+  divider.examples
 }
 
 (( $_s_ )) || main
