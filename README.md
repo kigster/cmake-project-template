@@ -11,7 +11,7 @@ Are you just starting with `CMake` or C++?
 
 Do you need some easy-to-use starting point, but one that has the basic moving parts you are likely going to need on any medium sized project?
 
-Do you believe in test-driven development, or at the very lest — write your tests *together* with the feature code? If so you'd want to start your project pre-integrated with a good testing framework.
+Do you believe in test-driven development, or at the very least — write your tests *together* with the feature code? If so you'd want to start your project pre-integrated with a good testing framework.
 
 Divider is a minimal project that's kept deliberately very small. When you build it using CMake/make (see below) it generates:
 
