@@ -3,7 +3,7 @@
 
 ---
 
-<a href="https://liberapay.com/kigster/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg" height="30"></a>&nbsp;&nbsp;&nbsp;<a href="https://liberapay.com/kigster/donate"><img src="https://img.shields.io/liberapay/goal/kigster.svg?logo=liberapay" height="30"></a>
+<a href="https://liberapay.com/kigster/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg" height="30"></a>&nbsp;&nbsp;&nbsp;<a href="https://liberapay.com/kigster/donate"><img src="https://img.shields.io/liberapay/goal/kigster.svg?logo=liberapay" height="30">&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/liberapay/patrons/kigster.svg?logo=liberapay" height="30"></a>
 
 # CMake C++ Project Template with Google-Test Unit Testing Library
 
