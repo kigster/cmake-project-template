@@ -1,7 +1,13 @@
-[![Build Status](https://travis-ci.org/kigster/cmake-project-template.svg?branch=master)](https://travis-ci.org/kigster/cmake-project-template)
+[![CMake on multiple platforms](https://github.com/kigster/cmake-project-template/actions/workflows/cmake-multi-platform.yml/badge.svg)](https://github.com/kigster/cmake-project-template/actions/workflows/cmake-multi-platform.yml)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkigster%2Fcmake-project-template.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fkigster%2Fcmake-project-template?ref=badge_shield)
 
-# CMake C++ Project Template
+# CMake C++ Project Template with Google-Test Unit Testing Library
+
+> WTF is this? 
+>
+> I was just starting with C++ and CMake and I was having a hard time building a workable template that had all the pieces I wanted. This project represents a culmination of work to distill down to bare minimum any C/C++ project that wants to have the option to be build via CMake, to install itself as executables, libraries (shared/static), and provides test binaries that can be used to execute unit tests.
+>
+> GoogleTest library is a git module, and is a pull by the "setup-and-run" script `./build-and-run`
 
 ### Division with a remainder library
 
