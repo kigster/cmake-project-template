@@ -1,6 +1,10 @@
 [![CMake on multiple platforms](https://github.com/kigster/cmake-project-template/actions/workflows/cmake-multi-platform.yml/badge.svg)](https://github.com/kigster/cmake-project-template/actions/workflows/cmake-multi-platform.yml)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkigster%2Fcmake-project-template.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fkigster%2Fcmake-project-template?ref=badge_shield)
 
+---
+
+<a href="https://liberapay.com/kigster/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg" height="30"></a>&nbsp;&nbsp;&nbsp;<a href="https://liberapay.com/kigster/donate"><img src="https://img.shields.io/liberapay/goal/kigster.svg?logo=liberapay" height="30"></a>
+
 # CMake C++ Project Template with Google-Test Unit Testing Library
 
 > WTF is this? 
